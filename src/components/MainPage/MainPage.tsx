@@ -1,0 +1,20 @@
+import React from 'react';
+import 'bootstrap/scss/bootstrap.scss'
+
+const myStyle = {
+    textAlign: 'center' as "center",
+    color: 'white',
+    paddingTop: '50px',
+}
+
+const MainPage = () => {
+    return (
+        <div style={myStyle}>
+            <p className="fs-1 fw-bold">Search for cheap airline tickets</p>
+            <p className="fs-5 fw-normal">The best way to buy cheap flights</p>
+        </div>
+    );
+};
+
+
+export default MainPage;

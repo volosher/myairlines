@@ -7,7 +7,7 @@ const myStyle = {
 
 const CurrencySwitcher = () => {
     return (
-        <div className="container">
+        <div>
             <select  className="form-select" style={myStyle} aria-label="Currency switcher">
                 <option value="USD" selected>USD</option>
                 <option value="EUR">EUR</option>

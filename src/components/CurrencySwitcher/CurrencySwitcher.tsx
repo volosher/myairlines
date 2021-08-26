@@ -1,8 +1,14 @@
 import React from 'react';
 
 const myStyle = {
-    width: '90px',
+    width: '60px',
+    padding: '4px 9px',
     borderRadius: '20px',
+    border: '1px solid white',
+    background: 'transparent',
+    color: 'white',
+    appearance: 'none' as 'none',
+
 }
 
 const CurrencySwitcher = () => {

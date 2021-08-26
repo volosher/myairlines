@@ -4,7 +4,7 @@ import styles from './Logo.module.scss'
 const Logo = () => {
     return (
         <div className={styles.logo}>
-            <h4>MyAirLines</h4>
+            <a href="#" className={styles.logo__link}><h4>MyAirLines</h4></a>
         </div>
     );
 };

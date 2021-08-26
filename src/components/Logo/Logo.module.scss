@@ -2,3 +2,12 @@
 
 }
 
+.logo__link,
+.logo__link:active,
+.logo__link:hover {
+  text-decoration: none;
+  color: #FFFFFF;
+  background: #FFFFFF;
+  text-shadow: 1px 3px 0 #969696, 1px 5px 5px #aba8a8;
+}
+

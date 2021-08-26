@@ -5,7 +5,7 @@ import TicketsSearchBar from "../TicketsSearchBar/TicketsSearchBar";
 const myStyle = {
     textAlign: 'center' as "center",
     color: 'white',
-    paddingTop: '50px',
+    paddingTop: '80px',
 }
 
 const MainPage = () => {

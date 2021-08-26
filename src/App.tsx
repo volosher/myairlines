@@ -1,11 +1,11 @@
 import React from 'react';
 import 'bootstrap/scss/bootstrap.scss'
-import CurrencySwitcher from "./components/CurrencySwitcher/CurrencySwitcher";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <div className="App">
-        <CurrencySwitcher/>
+        <Header/>
     </div>
   );
 }

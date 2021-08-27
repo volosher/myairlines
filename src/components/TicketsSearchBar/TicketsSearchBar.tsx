@@ -1,28 +1,27 @@
-import React from 'react';
-import MyInput from "../UI/input/MyInput";
+import React from 'react'
+import MyInput from '../UI/input/MyInput'
 import styles from './TicketsSearchBar.module.scss'
-import MyButton from "../UI/MyButton/MyButton";
-const TicketsSearchBar = () => {
-    return (
-        <div className={styles.searchbar}>
-            <MyInput
-                text={'From'}
-            />
-            <MyInput
-                text={'To'}
-            />
-            <MyInput
-                text={'Depart'}
-            />
-            <MyInput
-                text={'Return'}
-            />
-            <MyInput
-                text={'Passengers'}
-            />
-            <MyButton/>
-        </div>
-    );
-};
+import MyButton from '../UI/MyButton/MyButton'
 
-export default TicketsSearchBar;
+const TicketsSearchBar: React.FC = () => (
+  <div className={styles.searchbar}>
+    <MyInput
+      text="From"
+    />
+    <MyInput
+      text="To"
+    />
+    <MyInput
+      text="Depart"
+    />
+    <MyInput
+      text="Return"
+    />
+    <MyInput
+      text="Passengers"
+    />
+    <MyButton />
+  </div>
+)
+
+export default TicketsSearchBar

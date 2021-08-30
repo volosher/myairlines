@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from './Header.module.scss'
+import './Header.scss'
 import CurrencySwitcher from '../CurrencySwitcher/CurrencySwitcher'
 import Logo from '../Logo/Logo'
 
 const Header:React.FC = () => (
-  <div className={styles.header}>
+  <div className="header">
     <Logo />
     <CurrencySwitcher />
   </div>

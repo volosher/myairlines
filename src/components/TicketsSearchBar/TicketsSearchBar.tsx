@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from '../UI/input/Input'
+import { Input as Vaza } from '../UI/input/Input'
 import './TicketsSearchBar.scss'
 import Button from '../UI/Button/Button'
 
@@ -8,7 +8,7 @@ const TicketsSearchBar: React.FC = () => (
     <Input
       text="From"
     />
-    <Input
+    <Vaza
       text="To"
     />
     <Input

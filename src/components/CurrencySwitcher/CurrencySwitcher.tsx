@@ -1,7 +1,7 @@
 import React from 'react'
 import './CurrencySwitcher.scss'
 
-const CurrencySwitcher:React.FC = () => (
+export const CurrencySwitcher:React.FC = () => (
   <div>
     <select className="form-select cur-switch__select" aria-label="Currency switcher">
       <option value="USD" selected>USD</option>
@@ -11,5 +11,3 @@ const CurrencySwitcher:React.FC = () => (
     </select>
   </div>
 )
-
-export default CurrencySwitcher

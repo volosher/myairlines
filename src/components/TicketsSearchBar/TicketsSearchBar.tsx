@@ -1,9 +1,9 @@
 import React from 'react'
 import { Input } from '../UI/input/Input'
 import './TicketsSearchBar.scss'
-import Button from '../UI/Button/Button'
+import { Button } from '../UI/Button/Button'
 
-const TicketsSearchBar: React.FC = () => (
+export const TicketsSearchBar: React.FC = () => (
   <div className="search-bar">
     <Input
       text="From"
@@ -23,5 +23,3 @@ const TicketsSearchBar: React.FC = () => (
     <Button />
   </div>
 )
-
-export default TicketsSearchBar

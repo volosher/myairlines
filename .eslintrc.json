@@ -42,6 +42,7 @@
             "tsx": "never"
             }
             ],
+            "import/prefer-default-export": "off",
             "semi": ["error", "never"],
             "quotes": [2, "single"],
             "ignoreComments": 0,

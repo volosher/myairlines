@@ -11,3 +11,6 @@ export const Input: React.FC<InputPlaceholder> = ({ text }: InputPlaceholder) =>
     <input type="text" className="form-control search-bar__input" placeholder={text} aria-label="First name" />
   </div>
 )
+
+var sdf;
+vat ss;

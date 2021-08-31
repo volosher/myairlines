@@ -6,11 +6,10 @@ interface InputPlaceholder {
     text: string,
 }
 
-export const Input: React.FC<InputPlaceholder> = ({ text }: InputPlaceholder) => (
+const Input: React.FC<InputPlaceholder> = ({ text }: InputPlaceholder) => (
   <div className="search-bar__item">
     <input type="text" className="form-control search-bar__input" placeholder={text} aria-label="First name" />
   </div>
 )
 
-var sdf;
-vat ss;
+let sdf

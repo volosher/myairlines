@@ -1,17 +1,13 @@
-import React from 'react';
+import React from 'react'
 import 'bootstrap/scss/bootstrap.scss'
+import { Header } from './components/Header/Header'
+import { MainPage } from './components/MainPage/MainPage'
 
-function App() {
-  return (
-    <div className="App">
-        <div className="alert alert-primary" role="alert">
-            A simple primary alert—check it out!
-        </div>
-        <button type="button" className="btn btn-primary">
-            Notifications <span className="badge bg-secondary">4</span>
-        </button>
-    </div>
-  );
-}
+import './App.scss'
 
-export default App;
+export const App: React.FC = () => (
+  <div className="app">
+    <Header />
+    <MainPage />
+  </div>
+)

@@ -2,8 +2,12 @@ import React from 'react'
 import { Input } from '../UI/input/Input'
 import './TicketsSearchBar.scss'
 import { Button } from '../UI/Button/Button'
+import { getPost } from '../http/postApi'
+
+getPost()
 
 export const TicketsSearchBar: React.FC = () => (
+
   <div className="search-bar">
     <Input
       text="From"

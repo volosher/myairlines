@@ -19,7 +19,7 @@ type SelectOption = {
     value: string
   }
 
-export const SelectInput:React.FC = () => {
+export const SelectInputFrom:React.FC = () => {
   const dispatch = useDispatch()
   const customStyles = {
     control: (base: any) => ({

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getCurrency, ICurrencyItem } from './http/rapidApi'
+import { getCurrency, ICurrencyItem } from '../api/rapidApi'
 
 export const TestHttp: React.FC = () => {
   const [currencies, setCurrencies] = useState<ICurrencyItem[]>([])

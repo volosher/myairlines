@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
-import { getCurrency, ICurrencyItem } from '../http/rapidApi'
+import { getCurrency, ICurrencyItem } from '../../api/rapidApi'
 import './CurrencySwitcher.scss'
 
 export const CurrencySwitcher:React.FC = () => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Input } from '../UI/input/Input'
 import './TicketsSearchBar.scss'
 import { Button } from '../UI/Button/Button'
-import { getPost } from '../http/postApi'
+import { getPost } from '../../api/postApi'
 
 getPost()
 

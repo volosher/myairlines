@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect, useCallback } from 'react'
+import debounce from 'lodash.debounce'
 import 'bootstrap/scss/bootstrap.scss'
 import './SearchInput.scss'
 import Select, { OptionTypeBase, ValueType } from 'react-select'
-import { getCity, ICityItem } from '../../api/rapidApi'
-import { DestinationActionsTypes } from '../../store/reducers/Destination/DestinationTypes'
 
 const componentStyle = {
   DropdownIndicator: null,
@@ -31,6 +29,11 @@ export const SearchInput:React.FC<IProps> = ({
 
   const [query, setQuery] = useState('')
 
+  const debouncedSave = useCallback(
+    debounce((nextValue) => setQuery(nextValue), 500),
+    [],
+  )
+
   useEffect(() => {
     if (query) {
       handlerSearch(query)
@@ -38,7 +41,7 @@ export const SearchInput:React.FC<IProps> = ({
   }, [query])
 
   const handlerInputValue = (value:string) => {
-    setQuery(value)
+    debouncedSave(value)
   }
 
   return (

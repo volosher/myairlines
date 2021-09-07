@@ -22,6 +22,7 @@ export const TicketsSearchBar: React.FC = () => {
   const handlerChangeFrom = useCallback(
     (v) => {
       dispatch({ type: DestinationActionsTypes.GET_FROM, payload: v.value })
+      setCities([])
     },
     [],
   )
@@ -29,6 +30,7 @@ export const TicketsSearchBar: React.FC = () => {
   const handlerChangeTo = useCallback(
     (v) => {
       dispatch({ type: DestinationActionsTypes.GET_TO, payload: v.value })
+      setCities([])
     },
     [],
   )

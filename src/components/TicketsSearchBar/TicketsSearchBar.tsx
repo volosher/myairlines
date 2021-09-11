@@ -1,18 +1,20 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import moment from 'moment'
 import { Input } from '../UI/input/Input'
 import './TicketsSearchBar.scss'
 import { Button } from '../UI/Button/Button'
-import { getPost } from '../../api/postApi'
 import { DestinationActionsTypes } from '../../store/reducers/Destination/DestinationTypes'
 import { getCity, ICityItem } from '../../api/rapidApi'
 import { SearchInput } from '../SearchInput/SearchInput'
-
-getPost()
+import { DateInput } from '../SearchInput/DateInput/DateInput'
+import { DepartReturnActionsTypes } from '../../store/reducers/DepartReturn/DepartReturnReducerTypes'
 
 export const TicketsSearchBar: React.FC = () => {
   const dispatch = useDispatch()
   const [cities, setCities] = useState<ICityItem[]>([])
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
 
   const fromOptions = useMemo(() => cities.map((item) => ({
     value: item.PlaceName,
@@ -44,6 +46,23 @@ export const TicketsSearchBar: React.FC = () => {
     [],
   )
 
+  const handlerChangeDepart = useCallback(
+    (date) => {
+      const departDate = moment(date).format().substring(0, 10)
+      dispatch({ type: DepartReturnActionsTypes.SET_DEPART, payload: departDate })
+      setStartDate(date)
+    },
+    [],
+  )
+  const handlerChangeReturn = useCallback(
+    (date) => {
+      const returnDate = moment(date).format().substring(0, 10)
+      dispatch({ type: DepartReturnActionsTypes.SET_RETURN, payload: returnDate })
+      setEndDate(date)
+    },
+    [],
+  )
+
   return (
     <div className="search-bar">
       <SearchInput
@@ -58,12 +77,16 @@ export const TicketsSearchBar: React.FC = () => {
         options={fromOptions}
         handlerSearch={handlerSearch}
       />
-
-      <Input
-        text="Depart"
+      <DateInput
+        selected={startDate}
+        handleChange={handlerChangeDepart}
+        placeholder="Depart"
       />
-      <Input
-        text="Return"
+
+      <DateInput
+        selected={endDate}
+        handleChange={handlerChangeReturn}
+        placeholder="Return"
       />
       <Input
         text="Passengers"

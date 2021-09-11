@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export const DateInput:React.FC<IProps> = ({ selected, handleChange, placeholder }:IProps) => (
-  <div>
+  <div className="input-date">
     <DatePicker
       placeholderText={placeholder}
       selected={selected}

@@ -1,10 +1,12 @@
+@import './CurrencySwitcher.variables.scss';
+
 .cur-switch__select {
-  width: 60px;
-  padding: 4px 9px;
-  border-radius: 20px;
+  width: $currency-width;
+  padding: $currency-padding;
+  border-radius: $currency-border-radius;
   border: 1px solid white;
   background: transparent;
-  color: white;
+  color: $currency-text-color;
   appearance: none;
   cursor: pointer;
 }

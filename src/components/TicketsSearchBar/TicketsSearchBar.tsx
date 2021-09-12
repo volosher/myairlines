@@ -7,7 +7,7 @@ import { Button } from '../UI/Button/Button'
 import { DestinationActionsTypes } from '../../store/reducers/Destination/DestinationTypes'
 import { getCity, ICityItem } from '../../api/rapidApi'
 import { SearchInput } from '../SearchInput/SearchInput'
-import { DateInput } from '../SearchInput/DateInput/DateInput'
+import { DateInput } from '../DateInput/DateInput'
 import { DepartReturnActionsTypes } from '../../store/reducers/DepartReturn/DepartReturnReducerTypes'
 
 export const TicketsSearchBar: React.FC = () => {

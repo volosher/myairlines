@@ -1,8 +1,8 @@
-
+@import './SearchInput.variables.scss';
 
 .input-select {
-    width: 200px;
-    height: 60px;
+    width: $search-input-width;
+    height: $search-input-height;
     color:black;
    }
 

@@ -6,7 +6,7 @@ import './CurrencySwitcher.scss'
 
 export const CurrencySwitcher:React.FC = () => {
   const dispatch = useDispatch()
-  const selectedCurrency = useTypedSelector((state) => state.selected)
+  const selectedCurrency = useTypedSelector((state) => state.currency.selected)
 
   const selectedCurrencyHandler = (event: React.SyntheticEvent): void => {
     const target = event.target as HTMLInputElement
@@ -25,14 +25,13 @@ export const CurrencySwitcher:React.FC = () => {
 
     <div>
       <select
+        value={selectedCurrency}
         className="form-select cur-switch__select"
         aria-label="Currency switcher"
         onChange={selectedCurrencyHandler}
       >
-        {currencies.map((item) => <option selected={selectedCurrency === item.Code} value={item.Code} key={item.Code}>{item.Code}</option>)}
+        {currencies.map((item) => <option value={item.Code} key={item.Code}>{item.Code}</option>)}
       </select>
-      <h1>{selectedCurrency}</h1>
-
     </div>
   )
 }

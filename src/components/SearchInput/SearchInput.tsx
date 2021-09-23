@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce'
 import 'bootstrap/scss/bootstrap.scss'
 import './SearchInput.scss'
 import Select, { OptionTypeBase, ValueType } from 'react-select'
+import { FieldRenderProps } from 'react-final-form'
 
 const componentStyle = {
   DropdownIndicator: null,

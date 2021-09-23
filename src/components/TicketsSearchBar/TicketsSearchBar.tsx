@@ -1,6 +1,13 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, {
+  useCallback, useMemo, useState, useRef,
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
+import {
+  Field, Form, FieldRenderProps, useFormState,
+} from 'react-final-form'
+
+import { ValueType } from 'react-select'
 import { Input } from '../UI/input/Input'
 import './TicketsSearchBar.scss'
 import { Button } from '../UI/Button/Button'
@@ -13,6 +20,8 @@ import { DateInput } from '../DateInput/DateInput'
 import { DepartReturnActionsTypes } from '../../store/reducers/DepartReturn/DepartReturnReducerTypes'
 import { store, RootState } from '../../store'
 import { Tickets } from '../Tickets/Tickets'
+
+type Props = FieldRenderProps<string, any>
 
 export const TicketsSearchBar: React.FC = () => {
   const dispatch = useDispatch()
@@ -29,14 +38,6 @@ export const TicketsSearchBar: React.FC = () => {
 
   const handlerChangeFrom = useCallback(
     (v) => {
-      // const cityID = cities.filter((city) => city.PlaceName === v.value)
-      // let cityID = ''
-      // cities.forEach((elem) => {
-      //   if (elem.PlaceName === v.value) {
-      //     cityID = elem.PlaceId
-      //   }
-      // })
-
       dispatch({ type: DestinationActionsTypes.GET_FROM, payload: v.value })
 
       setCities([])
@@ -54,6 +55,7 @@ export const TicketsSearchBar: React.FC = () => {
 
   const handlerSearch = useCallback(
     (query) => {
+      console.log('query =', query)
       getCity(query).then((result) => {
         setCities(result.Places)
       })
@@ -82,11 +84,6 @@ export const TicketsSearchBar: React.FC = () => {
 
   const handlerChangeFlights = useCallback(
     () => {
-      console.log('In state currency = ', store.getState().currency.selected)
-      console.log('In state destination from = ', store.getState().destination.from)
-      console.log('In state destination to = ', store.getState().destination.to)
-      console.log('In state data = ', store.getState().departReturn.depart)
-
       getFlights(currency,
         store.getState().destination.from,
         store.getState().destination.to,
@@ -96,43 +93,187 @@ export const TicketsSearchBar: React.FC = () => {
     }, [],
   )
 
-  return (
-    <>
-      <div className="search-bar">
-        <SearchInput
-          placeholder="From"
-          handleChange={handlerChangeFrom}
-          options={fromOptions}
-          handlerSearch={handlerSearch}
-        />
-        <SearchInput
-          placeholder="To"
-          handleChange={handlerChangeTo}
-          options={fromOptions}
-          handlerSearch={handlerSearch}
-        />
-        <DateInput
-          selected={startDate}
-          handleChange={handlerChangeDepart}
-          placeholder="Depart"
-        />
+  // const ReactSelectFromAdapter: React.FC<Props> = ({ input, meta, rest }:Props) => (
 
-        <DateInput
-          selected={endDate}
-          handleChange={handlerChangeReturn}
-          placeholder="Return"
-        />
-        <Input
-          text="Passengers"
-        />
-        <Button
-          handleChange={handlerChangeFlights}
-        />
-        <Tickets
-          flights={flights}
-        />
-      </div>
-    </>
+  //   <SearchInput
+  //     {...input}
+  //     {...rest}
+  //     placeholder="From"
+  //     handleChange={handlerChangeFrom}
+  //     options={fromOptions}
+  //     handlerSearch={handlerSearch}
+  //     onChange={(event:React.SyntheticEvent) => {
+  //       input.onChange(event)
+  //     }}
+  //   />
+  // )
+  //   type Option = {
+  //     label: string;
+  //     value: string;
+  // }
+
+  // const NewSelectAdapter = ({ input, options, ...rest }: FieldRenderProps<string, HTMLElement>) => {
+
+  //   const handlerSearch = useCallback(
+  //     (query) => {
+  //       console.log('query =', query)
+  //       getCity(query).then((result) => {
+  //         setCities(result.Places)
+  //       })
+  //     },
+  //     [],
+  //   )
+  // }
+
+  // const ReactSelectFromAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
+
+  //   <SearchInput
+  //     {...input}
+  //     {...rest}
+  //     placeholder="From"
+  //     handleChange={handlerChangeFrom}
+  //     options={fromOptions}
+  //     handlerSearch={handlerSearch}
+  //   />
+  // )
+  // const ReactSelectToAdapter: React.FC<Props> = ({ input, rest }:Props) => (
+  //   <SearchInput
+  //     {...input}
+  //     {...rest}
+  //     onChange={(event:React.SyntheticEvent) => {
+  //       input.onChange(event)
+  //     }}
+  //     placeholder="To"
+  //     handleChange={handlerChangeTo}
+  //     options={fromOptions}
+  //     handlerSearch={handlerSearch}
+
+  //   />
+  // )
+
+  const DepartAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
+    <DateInput
+      {...input}
+      {...rest}
+      selected={startDate}
+      handleChange={handlerChangeDepart}
+      placeholder="Depart"
+    />
+  )
+
+  const ReturnAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
+    <DateInput
+      {...input}
+      {...rest}
+      selected={endDate}
+      handleChange={handlerChangeReturn}
+      placeholder="Return"
+    />
+  )
+
+  const PassengersAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
+    <Input
+      {...input}
+      {...rest}
+      text="Passengers"
+    />
+  )
+
+  // const PassengersAdapter: React.FC<Props> = ({ input, inputOnChange }:Props) => {
+  //   const inputProps = {
+  //     ...input,
+  //     onChange: (e: React.SyntheticEvent): void => {
+  //       input.onChange(e)
+  //       // eslint-disable-next-line no-unused-expressions
+  //       inputOnChange && inputOnChange(e)
+  //     },
+  //   }
+  //   return (
+  //     <Input
+  //       {...inputProps}
+  //       text="Passengers"
+  //     />
+  //   )
+  // }
+
+  const onSubmit = () => {
+    console.log('Form submitted')
+  }
+
+  return (
+    <Form
+      onSubmit={onSubmit}
+      initialValues={{ }}
+      render={({ handleSubmit, form }) => (
+        <form onSubmit={handleSubmit}>
+          <div className="search-bar">
+            <Field name="from">
+              {({ input, meta, rest }) => (
+                <SearchInput
+                  {...input}
+                  {...rest}
+                  placeholder="From"
+                  handleChange={handlerChangeFrom}
+                  options={fromOptions}
+                  handlerSearch={handlerSearch}
+                  onChange={(event:React.SyntheticEvent) => {
+                    input.onChange(event) // final-form's onChange
+                  }}
+                />
+              )}
+            </Field>
+
+            <Field name="to">
+              {({ input, meta, rest }) => (
+                <SearchInput
+                  {...input}
+                  {...rest}
+                  placeholder="To"
+                  handleChange={handlerChangeTo}
+                  options={fromOptions}
+                  handlerSearch={handlerSearch}
+                  onChange={(event:React.SyntheticEvent) => {
+                    input.onChange(event) // final-form's onChange
+                  }}
+                />
+              )}
+            </Field>
+
+            {/* <Field
+              name="from"
+              component={ReactSelectFromAdapter}
+
+            /> */}
+            {/* <Field
+              name="to"
+              component={ReactSelectToAdapter}
+
+            /> */}
+            <Field
+              name="Depart"
+              component={DepartAdapter}
+            />
+
+            <Field
+              name="Return"
+              component={ReturnAdapter}
+            />
+            <Field
+              name="passengers"
+              component={PassengersAdapter}
+            />
+
+            <Button
+              handleChange={handlerChangeFlights}
+            />
+            <Tickets
+              flights={flights}
+            />
+          </div>
+
+        </form>
+      )}
+    />
 
   )
 }

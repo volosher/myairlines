@@ -48,6 +48,7 @@
             "ignoreComments": 0,
             "skipBlankLines": 0,
         "no-use-before-define": "off",
+        "react/jsx-props-no-spreading": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
         "no-shadow": "off",

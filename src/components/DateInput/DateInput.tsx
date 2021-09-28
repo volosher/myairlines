@@ -6,19 +6,22 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 interface IProps {
     selected: Date | null | undefined,
-    handleChange: (
+   handleChange: (
         date: Date | [Date | null, Date | null] | /* for selectsRange */ null,
         event: React.SyntheticEvent | undefined,
     )=> void,
     placeholder: string | undefined,
-}
 
-export const DateInput:React.FC<IProps> = ({ selected, handleChange, placeholder }:IProps) => (
+   }
+
+export const DateInput:React.FC<IProps> = ({
+  selected, handleChange, placeholder,
+}:IProps) => (
   <div className="input-date">
     <DatePicker
+      onChange={handleChange}
       placeholderText={placeholder}
       selected={selected}
-      onChange={handleChange}
       minDate={new Date()}
       maxDate={addMonths(new Date(), 5)}
       showDisabledMonthNavigation

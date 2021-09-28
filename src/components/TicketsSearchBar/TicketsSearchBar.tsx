@@ -1,16 +1,11 @@
 import React, {
-  useCallback, useMemo, useState, useRef,
+  useCallback, useMemo, useState,
 } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
-import {
-  Field, Form, FieldRenderProps, useFormState,
-} from 'react-final-form'
-
-import { ValueType } from 'react-select'
+import { Form, Field } from 'react-final-form'
 import { Input } from '../UI/input/Input'
 import './TicketsSearchBar.scss'
-import { Button } from '../UI/Button/Button'
 import { DestinationActionsTypes } from '../../store/reducers/Destination/DestinationTypes'
 import {
   getCity, ICityItem, getFlights, IFlight,
@@ -21,11 +16,11 @@ import { DepartReturnActionsTypes } from '../../store/reducers/DepartReturn/Depa
 import { store, RootState } from '../../store'
 import { Tickets } from '../Tickets/Tickets'
 
-type Props = FieldRenderProps<string, any>
-
 export const TicketsSearchBar: React.FC = () => {
   const dispatch = useDispatch()
   const [cities, setCities] = useState<ICityItem[]>([])
+  const [chosenCityFrom, setChosenCityFrom] = useState(null)
+  const [chosenCityTo, setChosenCityTo] = useState(null)
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [flights, setFlights] = useState<IFlight>()
@@ -39,7 +34,7 @@ export const TicketsSearchBar: React.FC = () => {
   const handlerChangeFrom = useCallback(
     (v) => {
       dispatch({ type: DestinationActionsTypes.GET_FROM, payload: v.value })
-
+      setChosenCityFrom(v)
       setCities([])
     },
     [cities],
@@ -48,6 +43,7 @@ export const TicketsSearchBar: React.FC = () => {
   const handlerChangeTo = useCallback(
     (v) => {
       dispatch({ type: DestinationActionsTypes.GET_TO, payload: v.value })
+      setChosenCityTo(v)
       setCities([])
     },
     [cities],
@@ -80,7 +76,7 @@ export const TicketsSearchBar: React.FC = () => {
     [],
   )
 
-  const currency = useSelector((state:RootState) => state.currency.selected)
+  const currency = useSelector((state: RootState) => state.currency.selected)
 
   const handlerChangeFlights = useCallback(
     () => {
@@ -93,185 +89,147 @@ export const TicketsSearchBar: React.FC = () => {
     }, [],
   )
 
-  // const ReactSelectFromAdapter: React.FC<Props> = ({ input, meta, rest }:Props) => (
-
-  //   <SearchInput
-  //     {...input}
-  //     {...rest}
-  //     placeholder="From"
-  //     handleChange={handlerChangeFrom}
-  //     options={fromOptions}
-  //     handlerSearch={handlerSearch}
-  //     onChange={(event:React.SyntheticEvent) => {
-  //       input.onChange(event)
-  //     }}
-  //   />
-  // )
-  //   type Option = {
-  //     label: string;
-  //     value: string;
-  // }
-
-  // const NewSelectAdapter = ({ input, options, ...rest }: FieldRenderProps<string, HTMLElement>) => {
-
-  //   const handlerSearch = useCallback(
-  //     (query) => {
-  //       console.log('query =', query)
-  //       getCity(query).then((result) => {
-  //         setCities(result.Places)
-  //       })
-  //     },
-  //     [],
-  //   )
-  // }
-
-  // const ReactSelectFromAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
-
-  //   <SearchInput
-  //     {...input}
-  //     {...rest}
-  //     placeholder="From"
-  //     handleChange={handlerChangeFrom}
-  //     options={fromOptions}
-  //     handlerSearch={handlerSearch}
-  //   />
-  // )
-  // const ReactSelectToAdapter: React.FC<Props> = ({ input, rest }:Props) => (
-  //   <SearchInput
-  //     {...input}
-  //     {...rest}
-  //     onChange={(event:React.SyntheticEvent) => {
-  //       input.onChange(event)
-  //     }}
-  //     placeholder="To"
-  //     handleChange={handlerChangeTo}
-  //     options={fromOptions}
-  //     handlerSearch={handlerSearch}
-
-  //   />
-  // )
-
-  const DepartAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
-    <DateInput
-      {...input}
-      {...rest}
-      selected={startDate}
-      handleChange={handlerChangeDepart}
-      placeholder="Depart"
-    />
-  )
-
-  const ReturnAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
-    <DateInput
-      {...input}
-      {...rest}
-      selected={endDate}
-      handleChange={handlerChangeReturn}
-      placeholder="Return"
-    />
-  )
-
-  const PassengersAdapter: React.FC<Props> = ({ input, ...rest }:Props) => (
-    <Input
-      {...input}
-      {...rest}
-      text="Passengers"
-    />
-  )
-
-  // const PassengersAdapter: React.FC<Props> = ({ input, inputOnChange }:Props) => {
-  //   const inputProps = {
-  //     ...input,
-  //     onChange: (e: React.SyntheticEvent): void => {
-  //       input.onChange(e)
-  //       // eslint-disable-next-line no-unused-expressions
-  //       inputOnChange && inputOnChange(e)
-  //     },
-  //   }
-  //   return (
-  //     <Input
-  //       {...inputProps}
-  //       text="Passengers"
-  //     />
-  //   )
-  // }
+  const required = (value: any) => {
+    console.log('value in req = ', value)
+    return ((value ? undefined : 'Required'))
+  }
 
   const onSubmit = () => {
-    console.log('Form submitted')
+    console.log('submitted')
+    handlerChangeFlights()
   }
 
   return (
     <Form
       onSubmit={onSubmit}
-      initialValues={{ }}
-      render={({ handleSubmit, form }) => (
-        <form onSubmit={handleSubmit}>
-          <div className="search-bar">
-            <Field name="from">
-              {({ input, meta, rest }) => (
-                <SearchInput
-                  {...input}
-                  {...rest}
-                  placeholder="From"
-                  handleChange={handlerChangeFrom}
-                  options={fromOptions}
-                  handlerSearch={handlerSearch}
-                  onChange={(event:React.SyntheticEvent) => {
-                    input.onChange(event) // final-form's onChange
-                  }}
-                />
-              )}
-            </Field>
+      render={({
+        handleSubmit, form, submitting,
+      }) => (
+        <>
+          <form onSubmit={handleSubmit}>
+            <div className="search-bar">
+              <Field<string> name="from" validate={required}>
+                {({ input, meta, rest }) => {
+                  input.onChange(chosenCityFrom)
+                  return (
+                    <div>
+                      <SearchInput
+                        {...input}
+                        {...rest}
+                        name={input.name}
+                        city={input.value}
+                        placeholder="From"
+                        handleChange={handlerChangeFrom}
+                        options={fromOptions}
+                        handlerSearch={handlerSearch}
+                        onChange={(event: React.SyntheticEvent) => {
+                          input.onChange(event)
+                        }}
+                      />
+                      {meta.error && meta.touched && <span style={{ color: 'red', fontSize: '12px' }}>{meta.error}</span>}
+                    </div>
+                  )
+                }}
 
-            <Field name="to">
-              {({ input, meta, rest }) => (
-                <SearchInput
-                  {...input}
-                  {...rest}
-                  placeholder="To"
-                  handleChange={handlerChangeTo}
-                  options={fromOptions}
-                  handlerSearch={handlerSearch}
-                  onChange={(event:React.SyntheticEvent) => {
-                    input.onChange(event) // final-form's onChange
-                  }}
-                />
-              )}
-            </Field>
+              </Field>
+              <Field<string> name="to" validate={required}>
+                {({ input, meta, rest }) => {
+                  input.onChange(chosenCityTo)
+                  return (
+                    <div>
+                      <SearchInput
+                        {...input}
+                        {...rest}
+                        name={input.name}
+                        city={input.value}
+                        placeholder="To"
+                        handleChange={handlerChangeTo}
+                        options={fromOptions}
+                        handlerSearch={handlerSearch}
+                        onChange={(event: React.SyntheticEvent) => {
+                          input.onChange(event)
+                        }}
+                      />
+                      {meta.error && meta.touched && <span style={{ color: 'red', fontSize: '12px' }}>{meta.error}</span>}
+                    </div>
+                  )
+                }}
 
-            {/* <Field
-              name="from"
-              component={ReactSelectFromAdapter}
+              </Field>
+
+              <Field<string> name="Depart" validate={required}>
+                {({ input, meta }) => {
+                  console.log(input)
+                  input.onChange(startDate)
+                  return (
+                    <div>
+                      <DateInput
+                        handleChange={handlerChangeDepart}
+                        selected={startDate}
+                        placeholder="Depart"
+                      />
+                      {meta.error && meta.touched && <span style={{ color: 'red', fontSize: '12px' }}>{meta.error}</span>}
+                    </div>
+                  )
+                }}
+
+              </Field>
+              <Field<string> name="Return" validate={required}>
+                {({ input, meta }) => {
+                  console.log(input)
+                  input.onChange(endDate)
+                  return (
+                    <div>
+                      <DateInput
+                        handleChange={handlerChangeReturn}
+                        selected={endDate}
+                        placeholder="Return"
+                      />
+                      {meta.error && meta.touched && <span style={{ color: 'red', fontSize: '12px' }}>{meta.error}</span>}
+                    </div>
+                  )
+                }}
+
+              </Field>
+
+              <Field<string> name="passengers" validate={required}>
+                {({ input, meta, rest }) => (
+                  <div>
+                    <Input
+                      {...input}
+                      {...rest}
+                      placeholder="Passengers"
+                      name={input.name}
+                      value={input.value}
+                      onChange={(event: React.SyntheticEvent): void => {
+                        input.onChange(event)
+                      }}
+                    />
+                    {meta.error && meta.touched && <span style={{ color: 'red', fontSize: '12px' }}>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+              <div className="buttons">
+
+                <button className="btn btn-primary searchBtn" type="submit" disabled={submitting}>
+                  Search flights
+                </button>
+              </div>
+              {/* <Button
+              // handleChange={handlerChangeFlights}
+              submitting={false}
 
             /> */}
-            {/* <Field
-              name="to"
-              component={ReactSelectToAdapter}
 
-            /> */}
-            <Field
-              name="Depart"
-              component={DepartAdapter}
-            />
+            </div>
 
-            <Field
-              name="Return"
-              component={ReturnAdapter}
-            />
-            <Field
-              name="passengers"
-              component={PassengersAdapter}
-            />
-
-            <Button
-              handleChange={handlerChangeFlights}
-            />
+          </form>
+          <div>
             <Tickets
               flights={flights}
             />
           </div>
-
-        </form>
+        </>
       )}
     />
 

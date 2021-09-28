@@ -14,11 +14,13 @@ interface IProps {
     options: OptionTypeBase[]
     handleChange: (value: ValueType<OptionTypeBase, boolean>)=>void,
     handlerSearch: (query: string) => void
+    city: string,
+    name: string,
 
 }
 
 export const SearchInput:React.FC<IProps> = ({
-  placeholder, handleChange, options, handlerSearch,
+  city, name, placeholder, handleChange, options, handlerSearch,
 }: IProps) => {
   const customStyles = {
     control: (base: any) => ({
@@ -49,6 +51,8 @@ export const SearchInput:React.FC<IProps> = ({
 
     <div className="input-select">
       <Select
+        name={name}
+        city={city}
         styles={customStyles}
         options={options}
         components={componentStyle}

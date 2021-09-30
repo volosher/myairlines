@@ -16,7 +16,7 @@ export const Tickets: React.FC<ITicketsProps> = ({ flights }: ITicketsProps) => 
         <div className="ticket" key={item.MinPrice}>
           <div className="card text-center ">
             <div className="card-header">
-              Company:
+              Air Company:
               {' '}
               {flights.Carriers[index].Name}
 
@@ -67,7 +67,7 @@ export const Tickets: React.FC<ITicketsProps> = ({ flights }: ITicketsProps) => 
               </div>
 
             </div>
-            <div className="card-footer text-muted">
+            <div className="card-footer ">
               Departure date:
               {' '}
               {flights.Quotes[index].OutboundLeg.DepartureDate.substring(0, 10)}

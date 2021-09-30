@@ -20,3 +20,45 @@
 .card-header {
     color: black;
 }
+
+
+
+.ticket-body {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+
+.info {
+    text-align: center;
+    flex: 33.33%;
+}
+
+.img-flight {
+    width: 120px;
+    
+}
+
+.ticket-img {
+    display: flex;
+
+vertical-align: middle;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+}
+
+.info-title {
+    margin-top: 1rem;
+font-size: 0.8rem;
+}
+
+.info-value {
+    margin-top: 0;
+}
+
+.ticket-body p {
+    margin-bottom: 0;
+}

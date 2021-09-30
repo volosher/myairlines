@@ -3,20 +3,54 @@ import { IFlight } from '../../api/rapidApi'
 import './Tickets.scss'
 
 interface ITicketsProps {
-    flights: IFlight | undefined,
+  flights: IFlight | undefined,
 }
 
-export const Tickets: React.FC<ITicketsProps> = ({ flights }:ITicketsProps) => (!flights ? null : (
+export const Tickets: React.FC<ITicketsProps> = ({ flights }: ITicketsProps) => (
+  (!flights) ? null : (
 
-  <div className="tickets">
+    <>
+      {flights.Carriers.map((item, index) => (
 
-    {flights.Places.map((item) => (
-      <span>
-        <h2>DESTINATION TICKET</h2>
-        <h5>Destination</h5>
-        <h4>{item.CityName}</h4>
-      </span>
-    ))}
+        <div className="ticket" key={item.Name}>
+          <div className="card text-center ">
+            <div className="card-header">
+              Company:
+              {' '}
+              {item.Name}
 
-  </div>
-))
+            </div>
+            <div className="card-body">
+              <h5 className="card-title">Ticket</h5>
+              <p className="card-text">
+                Boarding:
+                { ' '}
+                {flights.Places[0].Name}
+              </p>
+              <p className="card-text">
+                Landing:
+                { ' '}
+                {flights.Places[1].Name}
+
+              </p>
+              <a href="/" className="btn btn-primary">
+                Buy ticket for
+                <br />
+                {flights.Currencies[0].Symbol}
+
+                {flights.Quotes[index].MinPrice}
+
+              </a>
+            </div>
+            <div className="card-footer text-muted">
+              Departure date:
+              {' '}
+              {flights.Quotes[index].OutboundLeg.DepartureDate}
+            </div>
+          </div>
+        </div>
+      ))}
+      {' '}
+
+    </>
+  ))

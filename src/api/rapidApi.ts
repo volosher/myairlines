@@ -10,25 +10,59 @@ interface ICurrency {
 
 /// ///// Flights
 
+interface IOutboundLeg {
+  OriginId: number,
+  DestinationId: number,
+  DepartureDate: string,
+}
+
 interface IQuotesItem {
+  QuoteId: number,
   MinPrice: number,
+  Direct: boolean,
+  OutboundLeg: IOutboundLeg,
   QuoteDateTime: string,
 }
 
 interface IPlacesItem {
   Name: string,
+  Type: string,
+  PlaceId: number,
+  IataCode: string,
+  SkyscannerCode: string,
   CityName: string,
+  CityId: string,
   CountryName: string,
 }
 interface ICurrenciesItem {
   Code: string,
   Symbol: string,
+  ThousandsSeparator: string,
+  DecimalSeparator: string,
+  SymbolOnLeft: boolean,
+  SpaceBetweenAmountAndSymbol: boolean,
+  RoundingCoefficient: number,
+  DecimalDigits: number
+}
+interface ICarriersItem {
+  Name: string
+  CarrierId: number
+}
+
+interface IRoutesItem {
+  Price: number,
+  QuoteDateTime: string,
+  OriginId: number,
+  DestinationId: number,
+  QuoteIds: [number]
 }
 
 export interface IFlight {
   Quotes: Array<IQuotesItem>,
+  Carriers: Array<ICarriersItem>,
   Places: Array<IPlacesItem>,
   Currencies: Array<ICurrenciesItem>,
+  Routes: Array<IRoutesItem>,
 }
 
 /// ///Flights

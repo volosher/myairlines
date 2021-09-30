@@ -1,5 +1,22 @@
-.tickets {
-    position: relative;
-top: 100px;
-left: -600px;
+.card {
+// background-image: url('https://cdn.businesstraveller.com/wp-content/uploads/fly-images/989642/Aeroflot-916x516.jpg');
+// background-size: cover;
+// opacity: 0.2;
+}
+
+.card {
+    color: black;
+    
+    // text-align: left;
+    
+}
+
+.ticket {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.card-header {
+    color: black;
 }

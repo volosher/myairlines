@@ -15,6 +15,7 @@ import { DateInput } from '../DateInput/DateInput'
 import { DepartReturnActionsTypes } from '../../store/reducers/DepartReturn/DepartReturnReducerTypes'
 import { store, RootState } from '../../store'
 import { Tickets } from '../Tickets/Tickets'
+import { FlightsActionsTypes } from '../../store/reducers/Flights/FlightsReducerTypes'
 
 export const TicketsSearchBar: React.FC = () => {
   const dispatch = useDispatch()
@@ -24,6 +25,8 @@ export const TicketsSearchBar: React.FC = () => {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [flights, setFlights] = useState<IFlight>()
+
+  console.log('flights = ', flights)
 
   const fromOptions = useMemo(() => cities.map((item) => ({
     value: item.PlaceId,
@@ -51,7 +54,6 @@ export const TicketsSearchBar: React.FC = () => {
 
   const handlerSearch = useCallback(
     (query) => {
-      console.log('query =', query)
       getCity(query).then((result) => {
         setCities(result.Places)
       })
@@ -85,18 +87,26 @@ export const TicketsSearchBar: React.FC = () => {
         store.getState().destination.to,
         store.getState().departReturn.depart).then((result) => {
         setFlights(result)
+        dispatch({ type: FlightsActionsTypes.GET_FLIGHTS, payload: result })
       })
     }, [],
   )
 
-  const required = (value: any) => {
-    console.log('value in req = ', value)
-    return ((value ? undefined : 'Required'))
+  const required = (value: any) => ((value ? undefined : 'Required'))
+
+  const animate = () => {
+    const title: HTMLElement | null = document.querySelector('.title')
+    const searchBar: HTMLElement | null = document.querySelector('.main-page')
+    if (title === null && title === null) {
+      return
+    }
+    title.classList.add('hide')
+    searchBar?.classList.add('move-up')
   }
 
   const onSubmit = () => {
-    console.log('submitted')
     handlerChangeFlights()
+    animate()
   }
 
   return (
@@ -159,7 +169,6 @@ export const TicketsSearchBar: React.FC = () => {
 
               <Field<string> name="Depart" validate={required}>
                 {({ input, meta }) => {
-                  console.log(input)
                   input.onChange(startDate)
                   return (
                     <div>
@@ -176,7 +185,6 @@ export const TicketsSearchBar: React.FC = () => {
               </Field>
               <Field<string> name="Return" validate={required}>
                 {({ input, meta }) => {
-                  console.log(input)
                   input.onChange(endDate)
                   return (
                     <div>

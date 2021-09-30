@@ -1,7 +1,8 @@
-.app {
-  background: -webkit-linear-gradient(45deg, rgb(121, 119, 234), rgb(0, 174, 212));
-  background: -moz-linear-gradient(45deg, rgb(121, 119, 234), rgb(0, 174, 212));
-  background: linear-gradient(45deg, rgb(121, 119, 234), rgb(0, 174, 212));
-  width: 100vw;
-  height: 100vh;
+
+
+html, body{
+  background: -webkit-linear-gradient(45deg, rgb(121, 119, 234), rgb(0, 174, 212)) no-repeat;
+  background: -moz-linear-gradient(45deg, rgb(121, 119, 234), rgb(0, 174, 212)) no-repeat;
+  background: linear-gradient(45deg, rgb(121, 119, 234), rgb(0, 174, 212)) no-repeat;
+  min-height: 100%;
 }

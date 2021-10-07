@@ -29,13 +29,17 @@
     border-top: dashed white;
 }
 
+.card-body {
+    padding: 0 1rem 0.5rem 1rem;
+}
+
 // #00aed4 #0d6efd;
 
 .ticket-body {
     display: flex;
     justify-content: space-around;
-    padding-top: 10px;
-    padding-bottom: 30px;
+   
+   
 }
 
 

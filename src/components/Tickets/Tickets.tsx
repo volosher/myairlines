@@ -2,6 +2,7 @@ import React from 'react'
 import { IFlight } from '../../api/rapidApi'
 import './Tickets.scss'
 import imageTrace from '../../img/plane_trace.png'
+import { filterFlightsFrom, filterFlightsTo } from '../../utills/filterFlightsById'
 
 interface ITicketsProps {
   flights: IFlight | undefined,
@@ -21,20 +22,23 @@ export const Tickets: React.FC<ITicketsProps> = ({ flights }: ITicketsProps) => 
               {flights.Carriers[index].Name}
 
             </div>
-            <div className="card-body">
+            <div className="card-body ">
               <div className="ticket-body">
                 <div className="ticket-from info">
                   <p className="info-title">Country</p>
                   <p className="info-value">
-                    {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.OriginId)[0].CountryName}
+                    {filterFlightsFrom(flights, item).CountryName}
+                    {/* {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.OriginId)[0].CountryName} */}
                   </p>
                   <p className="info-title">City</p>
                   <p className="card-text info-value">
-                    {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.OriginId)[0].CityName}
+                    {filterFlightsFrom(flights, item).CityName}
+                    {/* {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.OriginId)[0].CityName} */}
                   </p>
                   <p className="info-title">Station</p>
                   <p className="card-text info-value">
-                    {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.OriginId)[0].Name}
+                    {filterFlightsFrom(flights, item).Name}
+                    {/* {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.OriginId)[0].Name} */}
                   </p>
                 </div>
                 <div className="ticket-img">
@@ -53,15 +57,18 @@ export const Tickets: React.FC<ITicketsProps> = ({ flights }: ITicketsProps) => 
                 <div className="ticket-to info">
                   <p className="info-title">Country</p>
                   <p className="info-value">
-                    {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.DestinationId)[0].CountryName}
+                    {filterFlightsTo(flights, item).CountryName}
+                    {/* {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.DestinationId)[0].CountryName} */}
                   </p>
                   <p className="info-title">City</p>
                   <p className="card-text info-value">
-                    {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.DestinationId)[0].CityName}
+                    {filterFlightsTo(flights, item).CityName}
+                    {/* {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.DestinationId)[0].CityName} */}
                   </p>
                   <p className="info-title">Station</p>
                   <p className="card-text info-value">
-                    {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.DestinationId)[0].Name}
+                    {filterFlightsTo(flights, item).Name}
+                    {/* {flights.Places.filter((elem) => elem.PlaceId === item.OutboundLeg.DestinationId)[0].Name} */}
                   </p>
                 </div>
               </div>

@@ -10,13 +10,13 @@ interface ICurrency {
 
 /// ///// Flights
 
-interface IOutboundLeg {
+export interface IOutboundLeg {
   OriginId: number,
   DestinationId: number,
   DepartureDate: string,
 }
 
-interface IQuotesItem {
+export interface IQuotesItem {
   QuoteId: number,
   MinPrice: number,
   Direct: boolean,
@@ -24,7 +24,7 @@ interface IQuotesItem {
   QuoteDateTime: string,
 }
 
-interface IPlacesItem {
+export interface IPlacesItem {
   Name: string,
   Type: string,
   PlaceId: number,

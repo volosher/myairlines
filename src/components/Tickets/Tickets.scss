@@ -1,0 +1,76 @@
+.card {
+// background-image: url('https://cdn.businesstraveller.com/wp-content/uploads/fly-images/989642/Aeroflot-916x516.jpg');
+// background-size: cover;
+// opacity: 0.2;
+}
+
+.card {
+    color: black;
+    
+    // text-align: left;
+    
+}
+
+.ticket {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.card-header {
+    color: #fff;
+    background-color: #0d6efd;
+    border-bottom: dashed white;
+}
+
+.card-footer {
+    color: #fff;
+    background-color: darkorange;
+    border-top: dashed white;
+}
+
+.card-body {
+    padding: 0 1rem 0.5rem 1rem;
+}
+
+// #00aed4 #0d6efd;
+
+.ticket-body {
+    display: flex;
+    justify-content: space-around;
+   
+   
+}
+
+
+.info {
+    text-align: center;
+    flex: 33.33%;
+}
+
+.img-flight {
+    width: 120px;
+    
+}
+
+.ticket-img {
+    display: flex;
+
+vertical-align: middle;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+}
+
+.info-title {
+    margin-top: 1rem;
+font-size: 0.8rem;
+}
+
+.info-value {
+    margin-top: 0;
+}
+
+.ticket-body p {
+    margin-bottom: 0;
+}

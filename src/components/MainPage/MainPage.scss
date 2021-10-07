@@ -1,5 +1,9 @@
+@import './MainPage.variablex.scss';
+
 .main-page {
     text-align: center;
-    color: white;
+    color: $main-page-text-color;
     padding-top: 80px;
 }
+
+.hide {display: none}

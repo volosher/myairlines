@@ -3,11 +3,19 @@ import 'bootstrap/scss/bootstrap.scss'
 import './Input.scss'
 
 interface InputPlaceholder {
-    text: string,
+  placeholder: string
+  name: string
+  value: string
+  onChange: (e: React.SyntheticEvent) => void
 }
 
-export const Input: React.FC<InputPlaceholder> = ({ text }: InputPlaceholder) => (
+export const Input: React.FC<InputPlaceholder> = ({ ...props }: InputPlaceholder) => (
   <div className="search-bar__item">
-    <input type="text" className="form-control search-bar__input" placeholder={text} aria-label="First name" />
+    <input
+      {...props}
+      type="text"
+      className="form-control search-bar__input"
+      aria-label="First name"
+    />
   </div>
 )

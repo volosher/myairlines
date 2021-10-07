@@ -1,5 +1,7 @@
+@import './Header.variables.scss';
+
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 10px 60px;
+  padding: $header-padding;
 }

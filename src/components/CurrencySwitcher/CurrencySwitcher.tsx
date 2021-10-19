@@ -25,6 +25,7 @@ export const CurrencySwitcher:React.FC = () => {
 
     <div>
       <select
+        id="currency-select"
         value={selectedCurrency}
         className="form-select cur-switch__select"
         aria-label="Currency switcher"

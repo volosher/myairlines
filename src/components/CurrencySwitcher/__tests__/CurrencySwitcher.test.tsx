@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
-import { mount, render, shallow } from 'enzyme'
-
+import { mount, shallow } from 'enzyme'
 import { CurrencySwitcher } from '../CurrencySwitcher'
 
 const initialState = {
@@ -56,6 +55,7 @@ test('dispatch ', () => {
   const HandlerChange = jest.fn(() => store.dispatch(ChangeAction()))
   const actions = store.getActions()
   const expectedPayload = { type: 'GET_CURRENCY', payload: 'UKR' }
+  const myValue = store.getState()
 
   const component = mount(
     <Provider store={store}>
@@ -78,6 +78,8 @@ test('dispatch ', () => {
   expect(myElement.props().value).toEqual('USD')
   myElement.simulate('change', { target: { value: 'UKR' } })
   expect(HandlerChange).toHaveBeenCalled()
+
+  // expect(myElement.props().value).toEqual('UKR')
   expect(actions).toEqual([expectedPayload])
   console.log('values = ', store.getState())
 })

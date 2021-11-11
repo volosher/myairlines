@@ -48,10 +48,13 @@
             "ignoreComments": 0,
             "skipBlankLines": 0,
         "no-use-before-define": "off",
+        "react/jsx-props-no-spreading": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
         "no-shadow": "off",
         "max-len": ["error", 150, {"ignoreUrls": true}],
-        "@typescript-eslint/no-shadow": ["error"]
+        "@typescript-eslint/no-shadow": ["error"],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "no-console": "off"
     }
 }

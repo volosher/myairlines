@@ -1,0 +1,11 @@
+@import './DateInput.variables.scss';
+
+.react-datepicker__input-container input {
+    width: $date-input-width;
+    height: $date-input-height;
+    color:black;
+    border-radius: $date-input-border-radius;
+    padding-left: 10px;
+    margin-right: 1px;
+    border: 1px solid white;
+}
